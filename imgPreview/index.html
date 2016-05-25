@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>图片预览</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/imgPreview.css">
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js"></script>
+<script src="js/imgPreview2.js"></script>
+</head>
+
+<body>
+<div class="content">            
+    <div class="clearfix img-gather thumbs">
+        <a href="images/1.jpg" style="background-image:url(images/1.jpg)"></a>               
+        <a href="images/2.jpg" style="background-image:url(images/2.jpg)"></a>               
+        <a href="images/3.jpg" style="background-image:url(images/3.jpg)"></a>               
+        <a href="images/4.jpg" style="background-image:url(images/4.jpg)"></a>               
+        <a href="images/5.jpg" style="background-image:url(images/5.jpg)"></a>               
+        <a href="images/6.jpg" style="background-image:url(images/6.jpg)"></a>
+    </div>
+</div>
+<div id="popup"></div>
+<script>
+//用于imgPreview1.js 针对单个条图片预览
+/*$(function(){ 
+    $('.thumbs a').imgPreview();
+});*/
+//用于imgPreview2.js 针对多个条图片预览，自己项目使用
+$(function(){
+    $('.thumbs a').on('click',function(event){
+    	$('.thumbs a').imgPreview({event:event});
+    });
+});
+</script>
+</body>
+</html>
