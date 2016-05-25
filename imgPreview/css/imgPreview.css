@@ -52,6 +52,7 @@
 	text-align: center;
 	width:100%;
 	display:inline-block;
+	float:none;
 }
 /* image */
 
@@ -120,7 +121,6 @@
 	top:50%;
 	margin-top:-29px;
 	
-	-moz-transition:opacity 0.2s ease;
 	-webkit-transition:opacity 0.2s ease;
 	transition:opacity 0.2s ease;
 }
