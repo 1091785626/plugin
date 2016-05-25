@@ -4,8 +4,9 @@
                 id:null,
                 date: null,
                 run:1000,
-                content:null,
-                offset: 8//表区时
+                content:'',
+                serverOffset:0//,服务器偏移时间
+                //offset: 8//表区时
             }, options);
         // dom节点和其他
         var $this   = this,
@@ -13,7 +14,8 @@
             setDate = settings.date.replace(/-/g, "/"),//格式化时间
             setRun  = settings.run,//定时器时间
             setContent = settings.content,//倒计时前缀
-            setOffset  =settings.offset;//事件偏移 小时
+            setServerOffset = settings.serverOffset;//服务器偏移时间
+            //setOffset  = settings.offset;//时间偏移小时
         // 抛异常
         if (!settings.date) {
             $.error('请设定时间');
@@ -28,15 +30,16 @@
          */
         var currentDate = function () {
             var date = new Date();
-            var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
-            var new_date = new Date(utc + (3600000*setOffset));
+            //var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+            //var new_date = new Date(utc + (3600000*setOffset));
+            var new_date = new Date(date.getTime() + setServerOffset);
             return new_date;
         };
 
         /**
          *倒计时计算
          */
-        function down_count () {
+        function countdown () {
             var target_date = new Date(setDate), // 传入时间
                 current_date = currentDate(); //得到固定的当前日期
 
@@ -50,7 +53,7 @@
                 return;
             }
             //可以考虑加入正在进行的状态
-            //if (beingDownCount && typeof beingDownCount === 'function') beingDownCount();//回调
+            //if (beingDownCount && typeof beingDownCount === 'function') beingDownCount(setting.time);//回调
             var  _second = 1000,
                 _minute = _second * 60,
                 _hour = _minute * 60,
@@ -72,8 +75,9 @@
             $this.text(time);
         }       
         //开始定时器
-        down_count();
-        var interval = setInterval(down_count, setRun);
+        /*if(new Date(setDate)-currentDate()>0){
+            countdown();存在问题；触发两次回调
+        }*/
+        var interval = setInterval(countdown, setRun);
     };
-
 })(jQuery);
