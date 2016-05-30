@@ -27,7 +27,6 @@
 				this.index 			= $(settings.event.currentTarget).index();
 
 				settings.event.preventDefault();
-
 				this.items 			= obj;
 				this.createHtml();
 				this.bindEvent();

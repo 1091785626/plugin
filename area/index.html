@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>二、三级省市区联动</title>
+	<link rel="stylesheet" href="css/area.css">
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js"></script>
+	<script src="js/area.js"></script>
+</head>
+<body>
+<div class="form-group">
+    <label>区域信息</label>
+    <input type="text" name="area" id="area" value="" readonly="readonly" placeholder="请填写区域信息"/>
+    <input type="hidden" id="hd_area" value=""/>
+</div>
+<script>
+$("#area").mobileAreaSelect({
+    value:[330000,330100,330105],
+    text:['浙江省','杭州市','拱墅区'],
+    onChange:function(){
+    	console.log($("#hd_area").val());
+    }
+});
+</script>
+</body>
+</html>
