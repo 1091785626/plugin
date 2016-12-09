@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<script type="text/javascript" src="../lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="../src/jquery.imgspreview.js"></script>
+	<link rel="stylesheet" href="../src/jquery.imgspreview.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<title>轻量级图片预览</title>
+</head>
+
+<body>
+	<div class="content">
+		<div class="clearfix img-gather thumbs">
+			<a href="images/1.jpg" style="background-image:url(images/1.jpg)"></a>
+			<a href="images/2.jpg" style="background-image:url(images/2.jpg)"></a>
+			<a href="images/3.jpg" style="background-image:url(images/3.jpg)"></a>
+			<a href="images/4.jpg" style="background-image:url(images/4.jpg)"></a>
+			<a href="images/5.jpg" style="background-image:url(images/5.jpg)"></a>
+			<a href="images/6.jpg" style="background-image:url(images/6.jpg)"></a>
+		</div>
+	</div>
+	<div id="popup"></div>
+	<script>
+	$('.thumbs a').on('click', function(event) {
+		$('.thumbs a').imgsPreview({
+			event: event
+		});
+	});
+	</script>
+</body>
+
+</html>
