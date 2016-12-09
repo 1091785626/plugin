@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<script type="text/javascript" src="../lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="../src/jquery.downcount.js"></script>
+	<title>轻量级倒计时</title>
+</head>
+
+<body>
+	<div class="downCount" data-id="1"></div>
+	<div class="downCount" data-id="2"></div>
+	<script type="text/javascript">
+		$('.downCount[data-id=' + 1 + ']').downCount({
+			id: 1,
+			date: '2025-12-12 00:00:00',
+			run: 10,
+			server: '2016-05-12 00:00:00',
+			content: '距结束'
+		}, function() {
+			console.log('结束');
+		});
+		$('.downCount[data-id=' + 2 + ']').downCount({
+			id: 2,
+			date: '2017-12-12 00:00:00',
+			server: '2016-05-12 00:00:00',
+			content: '距开始'
+		}, function() {
+			console.log('开始');
+		});
+	</script>
+</body>
+
+</html>
