@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<script type="text/javascript" src="../lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="../src/jquery.selector.js"></script>
+	<link rel="stylesheet" href="../src/jquery.selector.css">
+	<title>移动端轻量级一，二，三级选择器</title>
+</head>
+
+<body>
+<div class="form-group">
+	<label>一级联动</label>
+	<input type="text" name="selector_1" id="selector_1" value="" readonly="readonly" placeholder="test1"/>
+	<input type=":hidden" id="selector_11" value="" />
+</div>
+<br />
+<br />
+<br />
+<div class="form-group">
+	<label>二级联动</label>
+	<input type="text" name="selector_2" id="selector_2" value="" readonly="readonly" placeholder="test2"/>
+	<input type=":hidden" id="selector_22" value="" />
+</div>
+<br />
+<br />
+<br />
+<div class="form-group">
+	<label>三级联动</label>
+	<input type="text" name="selector_3" id="selector_3" value="" readonly="readonly" placeholder="test3"/>
+	<input type=":hidden" id="selector_33" value="" />
+</div>
+<script>
+var data = [
+{
+	"label": "一1",
+	"value": "1",
+	"children": [{
+		"label": "二11",
+		"value": "1",
+		"children": [{
+			"label": "三111",
+			"value": "1"
+		}, {
+			"label": "三112",
+			"value": "2"
+		}, {
+			"label": "三113",
+			"value": "3"
+		}, {
+			"label": "三114",
+			"value": "4"
+		}]
+	}, {
+		"label": "二12",
+		"value": "2",
+		"children": [{
+			"label": "三121",
+			"value": "1"
+		}, {
+			"label": "三122",
+			"value": "2"
+		}]
+	}]
+},
+{
+	"label": "一2",
+	"value": "2",
+	"children": [{
+		"label": "二21",
+		"value": "1",
+		"children": [{
+			"label": "三211",
+			"value": "1"
+		}, {
+			"label": "三212",
+			"value": "2"
+		}, {
+			"label": "三213",
+			"value": "3"
+		}, {
+			"label": "三214",
+			"value": "4"
+		}]
+	}, {
+		"label": "二22",
+		"value": "2",
+		"children": [{
+			"label": "三221",
+			"value": "1"
+		}, {
+			"label": "三222",
+			"value": "2"
+		}]
+	}]
+}
+
+];
+$("#selector_1").selector({
+	value:['1'],
+	text:['一1'],
+	level:1,
+	data:data,
+	onChange:function(data){
+		console.log(data);
+	}
+});
+$("#selector_2").selector({
+	value:['1','1'],
+	text:['一1','二11'],
+	level:2,
+	data:data,
+	onChange:function(data){
+		console.log(data);
+	}
+});
+$("#selector_3").selector({
+	value:['1','1','1'],
+	text:['一1','二11','三111'],
+	data:data,
+	onChange:function(data){
+		console.log(data);
+	}
+});
+</script>
+
+</html>
