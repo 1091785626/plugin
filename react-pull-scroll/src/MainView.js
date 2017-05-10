@@ -239,8 +239,8 @@ class MainView extends Component {
 		this.shouldLoadForPull = true;
 	}
 	handleScroll(event) {
-		const {slide} = this.props;
-		if(!slide) return;
+		const {scroll} = this.props;
+		if(!scroll) return;
 		let isWindow = (this.scrollContainer === window);
 		// 延迟计算
 		this.timer && clearTimeout(this.timer);
@@ -295,7 +295,7 @@ MainView.propTypes = {
 	/**
 	 * 是否支持上滑，默认true
 	 */
-	slide:PropTypes.bool,
+	scroll:PropTypes.bool,
 	// for pull 
 	/**
 	 * 下拉结束即从状态2切换到状态3时的事件，准备去加载数据了
