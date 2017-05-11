@@ -11,7 +11,6 @@
 
 import React, {Component,PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import {Toast} from 'antd-mobile';
 class DownCount extends Component {
 	constructor(props) {
 		super(props);
@@ -33,7 +32,7 @@ class DownCount extends Component {
 			server
 		} = this.props;
 		if (!date) {
-			Toast.info('请设定时间');
+			// alert('请设定时间'); // 可替换
 			this.setState({
 				show:false
 			});
@@ -41,7 +40,7 @@ class DownCount extends Component {
 		}
 		// 抛异常
 		if (!Date.parse(date)) {
-			Toast.info('注意日期格式为 1992-09-21 12:00:00.');
+			// alert('注意日期格式为 1992-09-21 12:00:00.'); // 可替换
 			this.setState({
 				show:false
 			});
