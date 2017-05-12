@@ -1,6 +1,5 @@
 import React,{Component,PropTypes} from 'react';
 import LiItem from './LiItem';
-import {Toast} from 'antd-mobile';
 class Popup extends Component{
 	constructor(props){
 		super(props);
@@ -38,7 +37,7 @@ class Popup extends Component{
 		} = this.state;
 		event.preventDefault();
 		if(value.includes("0")){
-			Toast.info('请选择');
+			alert('请选择'); // 可替换
 			return false;
 		}
 		this.props.onSubmit&&this.props.onSubmit(event,value,text);
