@@ -18,7 +18,7 @@ const webpackConfig = {
 		/**
 		 * html引用路径
 		 */
-		publicPath: '/'
+		publicPath: process.env.NODE_ENV != 'development' ? './' : '/',
 	},
 	module: {
 		exprContextCritical: false,

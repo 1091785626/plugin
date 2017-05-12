@@ -1,14 +1,3 @@
-/**
- * 	<DownCount 
-		id="null"
-		date="2016-11-21 16:30:00"
-		run={1000}
-		content="距开始："
-		server="2016-11-19 16:30:00"
-		onEnd={this.handleEnd}
-	/>
- */
-
 import React, {Component,PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 class DownCount extends Component {
