@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import PullScroll from './PullScroll';
+import PullScroll from '../../src/PullScroll';
 class App extends Component {
 	constructor(props, context) {
 		super(props, context);
@@ -56,7 +54,7 @@ class App extends Component {
 			<PullScroll
 				className="pull-view-wrap"
 				wrapper=".scroll-container"
-				height={_global.innerHeight}
+				height={window.innerHeight}
 				loadDataForPull = {loadDataForPull}
 				loadDataForScroll = {loadDataForScroll}
 				isEnd = {isEnd}

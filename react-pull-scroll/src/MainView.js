@@ -89,7 +89,7 @@ class MainView extends Component {
 	handleStart(event) {
 		this.touching = true;
 		// 使微信不露底
-		this.startYForWeiXin = event.touches[0].screenY;
+		this.startYForWeiXin = event.touches ? event.touches[0].screenY : event.screenY; 
 	}
 
 	handleMove(event) {
