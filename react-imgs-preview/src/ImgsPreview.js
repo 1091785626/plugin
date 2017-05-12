@@ -29,20 +29,21 @@ class ImgsPreview extends Component{
 	}
 	render(){
 		const {
-			imgs = []
+			imgs = [],
+			imgsHD = []
 		} = this.props;
 		const {
 			show,
 			curImg
 		} = this.state;
 		return(
-			<div className="w-row w-reset imgs-preview">    
+			<div className="common-imgs-preview">    
 				{
 					imgs.map((item,index)=>{
 						return(
 							<img 
-								className="imgs-preview-show"
-								src={`${item}!4-4`} 
+								className="_show"
+								src={`${item}`} 
 								key={index}
 								data-index={index}
 								onClick={this.handleShow}
@@ -52,7 +53,7 @@ class ImgsPreview extends Component{
 				}
 				<Popup 
 					show={show}
-					imgs={imgs}
+					imgs={imgsHD}
 					curImg={curImg}
 					onClose ={this.handleClose}
 				/>
@@ -63,7 +64,8 @@ class ImgsPreview extends Component{
 
 
 ImgsPreview.PropTypes = {
-	imgs: PropTypes.array
+	imgs: PropTypes.array,
+	imgsHD: PropTypes.array
 };
 export default ImgsPreview;
 

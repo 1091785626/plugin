@@ -1,18 +1,19 @@
 import React,{Component,PropTypes} from 'react';
+import Glass from './Glass';
 import classnames from 'classnames';
 class Popup extends Component{
 	constructor(props){
 		super(props);
 		this.state={
 			curImg:0,
-			leftSpring:false,
-			rightSpring:false
+			_left:false,
+			_right:false
 		};
 		this.handleClose = this.handleClose.bind(this);
 		this.handleClickImg = this.handleClickImg.bind(this);
 
-		this.handleStart = this.handleStart.bind(this);
-		this.handleMove = this.handleMove.bind(this);
+		this.handlePrev = this.handlePrev.bind(this);
+		this.handleNext = this.handleNext.bind(this);
 	}
 	componentWillReceiveProps(nextProps) {
 		this.setState({
@@ -21,7 +22,10 @@ class Popup extends Component{
 		this.imgsHD = new Array(nextProps.imgs.length-1);
 	}
 	handleClose(event){
-		this.props.onClose&&this.props.onClose();
+		const type = event.target.getAttribute('data-tag');
+		(this.props.onClose&&type!=='img')&&this.props.onClose();
+		event.preventDefault();
+		event.stopPropagation();
 	}
 	handleClickImg(event){
 		/**
@@ -29,64 +33,42 @@ class Popup extends Component{
 		 */
 		event.stopPropagation();
 	}
-	handleStart(event){
-		event.preventDefault();
-		this.startX = event.touches[0].pageX;
-		this.isMove = 0 ;
-	}
-	handleMove(event){
-		this.endX = event.changedTouches[0].clientX;
-		if (this.endX - this.startX > 10 && !this.isMove) {
-			this.handlePrev();
-			this.isMove = 1;
-		} else if (this.endX - this.startX < -10 && !this.isMove) {
-			this.handleNext();
-			this.isMove = 1;
-		}
-	}
 	handlePrev() {
-		const {
-			curImg
-		} = this.state;
-		const {
-			imgs
-		} = this.props;
+		const { curImg } = this.state;
+		const { imgs } = this.props;
 		if (curImg > 0) {
-			this.setState({
-				curImg: curImg - 1
-			});
+			this.setState({ curImg: curImg - 1 });
+			return true;
 		} else {
 			this.setState({
-				leftSpring: true
+				_left: true
 			}, () => {
 				setTimeout(() => {
 					this.setState({
-						leftSpring: false
+						_left: false
 					});
 				}, 500);
 			});
+			return false;
 		}
+
 	}
 	handleNext() {
-		const {
-			curImg
-		} = this.state;
-		const {
-			imgs
-		} = this.props;
+		const { curImg } = this.state;
+		const { imgs } = this.props;
 		if (curImg < imgs.length - 1) {
-			this.setState({
-				curImg: curImg + 1
-			});
+			this.setState({ curImg: curImg + 1 });
+			return true;
 		} else {
 			this.setState({
-				rightSpring: true
+				_right: true
 			}, () => {
 				setTimeout(() => {
 					this.setState({
-						rightSpring: false
+						_right: false
 					});
 				}, 500);
+				return false;
 			});
 		}
 	}
@@ -97,50 +79,52 @@ class Popup extends Component{
 		} = this.props;
 		const {
 			curImg,
-			leftSpring,
-			rightSpring
+			_left,
+			_right
 		} = this.state;
 		if(!show){
 			return null;
 		}
 		return(
 			<div 
-				className="imgs-preview-popup" 
+				className="common-imgs-preview-popup" 
 				onClick={this.handleClose} 
 				onTouchStart={this.handleStart} 
 				onTouchMove={this.handleMove}
 			>
 			
-			    <div className={
-			    	classnames(
-			    		("imgs-slide"),
-			    		{"leftSpring":leftSpring},
-			    		{"rightSpring":rightSpring}
-			    	)
-			    }
+				<div className={
+					classnames(
+						("_slide"),
+						{"_left":_left},
+						{"_right":_right}
+					)
+				}
 
-			    	style={{left:`-${curImg*100}%`}}
-			    >
-			    	{
-			    		imgs.map((item,index)=>{
-			    			let img = item;
-			    			if(Math.abs(curImg-index)>1&&this.imgsHD[index]==undefined){
-			    				img=undefined;
-			    			}
-			    			this.imgsHD[index] = img;
-			    			return (
-			    				<div className="placeholder" key ={index}>
-			    				    <img 
-			    				    	src={img} 
-			    				    	onClick={this.handleClickImg}
-			    				    />
-			    				</div>
-			    			);
-			    		})
-			    	}
-			    </div>
-			    <span className="imgs-pages">{curImg+1}/{imgs.length}</span>
-			    <span className="imgs-close" onClick={this.handleClose}>&#10005;</span>
+					style={{left:`-${curImg*window.innerWidth}px`}}
+				>
+					{
+						imgs.map((item,index)=>{
+							let img = item;
+							if(Math.abs(curImg-index)>1&&this.imgsHD[index]==undefined){
+								img=undefined;
+							}
+							this.imgsHD[index] = img;
+							return (
+								<div className="_placeholder" key ={index}>
+									<Glass 
+										src={img}
+										onNext ={this.handleNext}
+										onPrev ={this.handlePrev}
+										show = {curImg}
+									/>
+								</div>
+							);
+						})
+					}
+				</div>
+				<span className="_pages">{curImg+1}/{imgs.length}</span>
+				<span className="_close" onClick={this.handleClose}>&#10005;</span>
 			</div>
 		);
 	}

@@ -1,0 +1,52 @@
+.common-glass {
+	text-align: center;
+	overflow: hidden;
+	._flash {
+		-webkit-animation-name: flash;
+		animation-name: flash;
+	}
+
+	._animated {
+		-webkit-animation-duration: 1s;
+		animation-duration: 1s;
+		-webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+	}
+
+	._lena {
+		position: relative;
+	}
+	._scale{
+		transition: transform .8s;
+	}
+	img{
+		display: inline-block;
+		max-height: 100%;
+		max-width: 100%;
+		vertical-align: middle;
+	}
+}
+
+@-webkit-keyframes flash {
+	from, 50%, to {
+		opacity: 1;
+	}
+
+	25%, 75% {
+		opacity: 0;
+	}
+}
+
+@keyframes flash {
+	from, 50%, to {
+		opacity: 1;
+	}
+
+	25%, 75% {
+		opacity: 0;
+	}
+}
+
+* {
+	-webkit-user-select: none;
+}
