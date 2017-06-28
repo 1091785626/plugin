@@ -1,7 +1,8 @@
 /**
- * <ImgsPreview imgs={imgs}/>
+ * <ImgsPreview imgs={imgs} imgsHD={imgs}/>
  */
-import React,{Component,PropTypes} from 'react';
+import React, { Component, createElement } from 'react';
+import PropTypes from 'prop-types';
 import Popup from './Popup';
 import './ImgsPreview.scss';
 class ImgsPreview extends Component{
@@ -29,8 +30,11 @@ class ImgsPreview extends Component{
 	}
 	render(){
 		const {
+			diy,
+			component,
 			imgs = [],
-			imgsHD = []
+			imgsHD = [],
+			...rest
 		} = this.props;
 		const {
 			show,
@@ -38,8 +42,20 @@ class ImgsPreview extends Component{
 		} = this.state;
 		return(
 			<div className="common-imgs-preview">    
-				{
+				{	
 					imgs.map((item,index)=>{
+						if (diy) {
+							return createElement(
+								component,
+								{
+									key: `${item}`,
+									img: item,
+									index: index,
+									onPreview:this.handleShow,
+									...rest
+								}
+							);
+						}
 						return(
 							<img 
 								className="_show"
